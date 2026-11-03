@@ -1,10 +1,11 @@
 import re
-import pkg_resources
 import requests
 import typing as T
 
 
 from json import JSONDecodeError
+
+from packaging.version import parse as parse_version
 
 # This code is adapted from cumulusci/cli/utils.py
 FINAL_VERSION_RE = re.compile(r"^[\d\.]+$")
@@ -29,7 +30,7 @@ def get_latest_final_version():
     for versionstring in res["releases"].keys():
         if not is_final_release(versionstring):
             continue
-        versions.append(pkg_resources.parse_version(versionstring))
+        versions.append(parse_version(versionstring))
     versions.sort(reverse=True)
     return versions[0]
 
@@ -65,7 +66,7 @@ def check_latest_version(version: str) -> IsLatestVersion:
 
 def get_installed_version(version):
     """returns the version name (e.g. 2.0.0b58) that is installed"""
-    return pkg_resources.parse_version(version)
+    return parse_version(version)
 
 
 # from cumulusci/utils/http/requests_utils.py
