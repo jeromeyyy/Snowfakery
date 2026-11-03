@@ -39,6 +39,7 @@ dependencies = [
     "gvgen",
     "pydantic>=2,<3",
     "python-baseconv",
+    "packaging",
     "requests",
     "setuptools>=75.4.0",
 ]
